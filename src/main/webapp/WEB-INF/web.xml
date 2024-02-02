@@ -109,4 +109,14 @@
     <servlet-name>SeartchServlet</servlet-name>
     <url-pattern>/SeartchServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewServlet</display-name>
+    <servlet-name>ViewServlet</servlet-name>
+    <servlet-class>servlet.ViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewServlet</servlet-name>
+    <url-pattern>/ViewServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

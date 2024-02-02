@@ -45,6 +45,30 @@ public class DataDAO {
 		return true;
 
 	}
+	//閲覧ページで全データを表示するためのメソッド
+	public static List<Data> getAllData() {
+		List<Data> dataList = new ArrayList<>();
+		Data data = null;
+		try {
+			Class.forName(driverName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+			String sql = "SELECT * FROM data_table";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				data = new Data(rs.getString("day"), rs.getString("purpose"), rs.getInt("price"));
+				data.setId(rs.getInt("id"));
+				dataList.add(data);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return dataList;
+	}
 
 	//検索ワードから特定する
 	public static List<Data> searchWord(String day, String purpose) {
