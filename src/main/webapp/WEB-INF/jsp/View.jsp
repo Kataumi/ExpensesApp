@@ -29,6 +29,11 @@
 			<td><%=data.getDay()%></td>
 			<td><%=data.getPurpose()%></td>
 			<td><%=data.getPrice()%></td>
+			<td><a href="EditServlet?id=<%=data.getId()%>">編集する</a></td>
+			
+			<!-- [?id=<=data.getId()>]はクエリパラメーター
+			 サーバーに送りたいデータを指定するために追加する文字列。
+			 この場合、EditServletにdata.getId()という値をidと名付けて送っている-->
 		</tr>
 		<%
 }

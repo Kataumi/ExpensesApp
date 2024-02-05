@@ -2,12 +2,20 @@ package dto;
 
 import java.io.Serializable;
 
-public class Data implements Serializable  {
+public class Data implements Serializable {
 
 	private int id;
 	private String day;
 	private String purpose;
 	private int price;
+
+	public Data(int id, String day, String purpose, int price) {
+		super();
+		this.id = id;
+		this.day = day;
+		this.purpose = purpose;
+		this.price = price;
+	}
 
 	public Data(String day, String purpose, int price) {
 		super();
@@ -59,7 +67,7 @@ public class Data implements Serializable  {
 	//dataListの内容を日本語に直すメソッド
 	//dto.Data@17c0e322から読める文字に変換する
 	public String toString() {
-		return "Data{" +"day='" + day + '\'' +", purpose='" + purpose + '\'' +'}';
+		return "Data{" + "day='" + day + '\'' + ", purpose='" + purpose + '\'' + '}';
 	}
 
 }

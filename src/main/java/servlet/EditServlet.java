@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 
+import dao.DataDAO;
+import dto.Data;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +15,13 @@ public class EditServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Edit.jsp");
-		rd.forward(request, response);
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		Data data = DataDAO.getDataById(id);
+		
+		request.setAttribute("data", data);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Edit.jsp");
+		dispatcher.forward(request, response);
 	}
 }

@@ -45,6 +45,7 @@ public class DataDAO {
 		return true;
 
 	}
+
 	//閲覧ページで全データを表示するためのメソッド
 	public static List<Data> getAllData() {
 		List<Data> dataList = new ArrayList<>();
@@ -68,6 +69,56 @@ public class DataDAO {
 		}
 
 		return dataList;
+	}
+
+	//指定したIDに対応するデータをデータベースから取得するためのメソッド
+	public static Data getDataById(int id) {
+		Data data = null;
+		try {
+			Class.forName(driverName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+			String sql = "SELECT * FROM data_table WHERE id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			//idを見つけたらそれに関連するレコードを取得する
+			if (rs.next()) {
+				String day = rs.getString("day");
+				String purpose = rs.getString("purpose");
+				int price = rs.getInt("price");
+				data = new Data(day, purpose, price);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
+	//編集する
+	public static int getEdit(int id, String day, String purpose, int price) {
+		int result = 0;
+		try {
+			Class.forName(driverName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+			String sql = "UPDATE data_table SET day=?,purpose=?,price=? WHERE id=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, day);
+			ps.setString(2, purpose);
+			ps.setInt(3, price);
+			ps.setInt(4, id);
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	//検索ワードから特定する

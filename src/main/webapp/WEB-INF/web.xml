@@ -119,4 +119,14 @@
     <servlet-name>ViewServlet</servlet-name>
     <url-pattern>/ViewServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetEdit</display-name>
+    <servlet-name>GetEdit</servlet-name>
+    <servlet-class>servlet.GetEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetEdit</servlet-name>
+    <url-pattern>/GetEdit</url-pattern>
+  </servlet-mapping>
 </web-app>
