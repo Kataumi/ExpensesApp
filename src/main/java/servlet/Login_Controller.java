@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class Login_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,11 +26,11 @@ public class Login_Controller extends HttpServlet {
 
 		if (user.getName().equals(name) && user.getPassword().equals(password)) {
 			nextPage = "WEB-INF/jsp/LoginSuccess.jsp";
-			request.setAttribute("user", user);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+			rd.forward(request, response);
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
-		rd.forward(request, response);
 
 	}
 

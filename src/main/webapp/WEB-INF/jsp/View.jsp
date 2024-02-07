@@ -11,12 +11,14 @@
 </head>
 <body>
 	<p>あなたが登録した家計簿を表示します</p>
+	<p><a href=MainServlet>メイン画面へ戻る</a></p>
+	
 	<table>
 		<tr>
-			<th>ID</th>
-			<th>Day</th>
-			<th>Purpose</th>
-			<th>Price</th>
+			<th>番号</th>
+			<th>日付</th>
+			<th>用途</th>
+			<th>金額</th>
 		</tr>
 		<%
 		List<Data> list = (List<Data>) request.getAttribute("dataList");
@@ -28,8 +30,10 @@
 			<td><%=data.getId()%></td>
 			<td><%=data.getDay()%></td>
 			<td><%=data.getPurpose()%></td>
-			<td><%=data.getPrice()%></td>
+			<td><%=data.getPrice()%>円</td>
 			<td><a href="EditServlet?id=<%=data.getId()%>">編集する</a></td>
+			<td><a href="ToDelete?id=<%=data.getId()%>">削除する</a></td>
+			
 			
 			<!-- [?id=<=data.getId()>]はクエリパラメーター
 			 サーバーに送りたいデータを指定するために追加する文字列。

@@ -90,7 +90,7 @@ public class DataDAO {
 				String day = rs.getString("day");
 				String purpose = rs.getString("purpose");
 				int price = rs.getInt("price");
-				data = new Data(day, purpose, price);
+				data = new Data(id, day, purpose, price);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,7 +124,6 @@ public class DataDAO {
 	//検索ワードから特定する
 	public static List<Data> searchWord(String day, String purpose) {
 		List<Data> dataList = new ArrayList<>();
-		Data data = null;
 		try {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
@@ -137,20 +136,35 @@ public class DataDAO {
 			ps.setString(2, purpose);
 
 			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				data = new Data(rs.getString("day"), rs.getString("purpose"));
+			while (rs.next()) {
+				Data data = new Data(rs.getString("day"), rs.getString("purpose"), rs.getInt("price"));
+				data.setId(rs.getInt("id"));
 				dataList.add(data);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// データが空でない場合、その内容をログに出力
-		if (!dataList.isEmpty()) {
-			System.out.println("Data found: " + dataList);
-		} else {
-			System.out.println("No data found for the given day and purpose.");
-		}
+
 		return dataList;
+	}
+
+	//指定したIDを削除する
+	public static int deletetDataById(int id) {
+		int result = 0;
+		try {
+			Class.forName(driverName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+			String sql = "DELETE FROM data_table WHERE id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

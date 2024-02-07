@@ -11,7 +11,7 @@
 		<p>日付：${data.day}</p>
 		<p>用途：${data.purpose}</p>
 		<p>金額：${data.price}円</p>
-		<a href=MainServlet>メイン画面へ戻る</a>
+		<p><a href=MainServlet>メイン画面へ戻る</a></p>
 
 </body>
 </html>

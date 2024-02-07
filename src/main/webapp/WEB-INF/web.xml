@@ -129,4 +129,44 @@
     <servlet-name>GetEdit</servlet-name>
     <url-pattern>/GetEdit</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToSeartch</display-name>
+    <servlet-name>ToSeartch</servlet-name>
+    <servlet-class>servlet.ToSeartch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToSeartch</servlet-name>
+    <url-pattern>/ToSeartch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToDelete</display-name>
+    <servlet-name>ToDelete</servlet-name>
+    <servlet-class>servlet.ToDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToDelete</servlet-name>
+    <url-pattern>/ToDelete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>servlet.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToCreate</display-name>
+    <servlet-name>ToCreate</servlet-name>
+    <servlet-class>servlet.ToCreate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToCreate</servlet-name>
+    <url-pattern>/ToCreate</url-pattern>
+  </servlet-mapping>
 </web-app>

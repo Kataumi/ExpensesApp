@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>編集完了画面</title>
+<title>更新成功</title>
 </head>
 <body>
 	<h1>家計簿の編集が完了しました</h1>

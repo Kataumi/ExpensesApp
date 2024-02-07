@@ -29,14 +29,15 @@ public class Controller extends HttpServlet {
 
 		if (flag) {
 			nextPage = "WEB-INF/jsp/ReggistSuccess.jsp";
-			request.setAttribute("user", user);
-
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-
 			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 			rd.forward(request, response);
-
+		} else {
+			request.setAttribute("errorMessage", "新規登録できませんでした");
+			nextPage = "WEB-INF/jsp/ReggistFalse.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+			rd.forward(request, response);
 		}
 	}
 }

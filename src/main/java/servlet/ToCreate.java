@@ -8,19 +8,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ToMainServlet extends HttpServlet {
+public class ToCreate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/main.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Create.jsp");
 		rd.forward(request, response);
 	}
-//
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/main.jsp");
-//		rd.forward(request, response);
-//	}
 
 }
