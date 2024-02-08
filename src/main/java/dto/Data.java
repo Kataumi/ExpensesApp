@@ -5,10 +5,12 @@ import java.io.Serializable;
 public class Data implements Serializable {
 
 	private int id;
+	private int user_id;
 	private String day;
 	private String purpose;
 	private int price;
 
+	//GetEditの家計簿更新用
 	public Data(int id, String day, String purpose, int price) {
 		super();
 		this.id = id;
@@ -17,6 +19,7 @@ public class Data implements Serializable {
 		this.price = price;
 	}
 
+	//GetCreateの家計簿作成、閲覧用
 	public Data(String day, String purpose, int price) {
 		super();
 		this.day = day;
@@ -24,6 +27,7 @@ public class Data implements Serializable {
 		this.price = price;
 	}
 
+	//家計簿の詳細検索用
 	public Data(String day, String purpose) {
 		super();
 		this.day = day;
@@ -37,6 +41,14 @@ public class Data implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getDay() {

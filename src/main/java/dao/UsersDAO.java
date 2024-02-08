@@ -41,29 +41,32 @@ public class UsersDAO {
 		return true;
 
 	}
-		//ログイン処理
-	    public static User loginUser(String name, String password) {
-	        User user = null;
-	        try {
-	            Class.forName(driverName);
-	        } catch (ClassNotFoundException e) {
-	            e.printStackTrace();
-	        }
-	        try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-	            String sql = "SELECT * FROM login_table WHERE name = ? AND password = ?";
-	            PreparedStatement ps = con.prepareStatement(sql);
-	            ps.setString(1, name);
-	            ps.setString(2, password);
 
-	            ResultSet rs = ps.executeQuery();
+	//ログイン処理
+	public static User loginUser(String name, String password) {
+		User user = null;
+		try {
+			Class.forName(driverName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+			String sql = "SELECT * FROM login_table WHERE name = ? AND password = ?";
 
-	            if (rs.next()) {
-	                user = new User(rs.getString("name"), rs.getString("password"));
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	        return user;
-	    }
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, password);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				user = new User(
+						rs.getString("name"),
+						rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
-
+}
