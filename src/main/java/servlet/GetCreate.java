@@ -17,11 +17,12 @@ public class GetCreate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String day = request.getParameter("day");
 		String purpose = request.getParameter("purpose");
 		int price = Integer.parseInt(request.getParameter("price"));
 
-		Data data = new Data(day, purpose, price);
+		Data data = new Data(user_id,day, purpose, price);
 		boolean flag = DataDAO.reggistData(data);
 
 		String nextPage = "";

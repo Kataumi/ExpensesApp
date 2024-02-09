@@ -10,18 +10,20 @@ public class Data implements Serializable {
 	private String purpose;
 	private int price;
 
-	//GetEditの家計簿更新用
-	public Data(int id, String day, String purpose, int price) {
+	//GetCreateの家計簿作成、閲覧用
+	public Data(int user_id, String day, String purpose, int price) {
 		super();
-		this.id = id;
+		this.user_id = user_id;
 		this.day = day;
 		this.purpose = purpose;
 		this.price = price;
 	}
 
-	//GetCreateの家計簿作成、閲覧用
-	public Data(String day, String purpose, int price) {
+	//GetEditの家計簿更新用
+	public Data(int id, int user_id, String day, String purpose, int price) {
 		super();
+		this.id = id;
+		this.user_id = user_id;
 		this.day = day;
 		this.purpose = purpose;
 		this.price = price;

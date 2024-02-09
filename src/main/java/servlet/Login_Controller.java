@@ -20,7 +20,7 @@ public class Login_Controller extends HttpServlet {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 
-		User user = UsersDAO.loginUser(name, password);
+		User user = UsersDAO.loginUser(name, password, request);
 
 		String nextPage = "";
 

@@ -10,6 +10,7 @@
 <h1>家計簿の登録をする</h1>
 <p><a href=MainServlet>メイン画面へ戻る</a></p>
 <form action="GetCreate" method="post">
+<input type="hidden" name="user_id" value="${user_id}">
 日付：<input type ="date" name = "day"><br>
 用途：<input type ="text" name = "purpose"><br>
 金額：<input type ="text" name = "price">円<br>

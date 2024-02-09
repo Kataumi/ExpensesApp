@@ -27,11 +27,12 @@ public class DataDAO {
 			System.out.println("DBが存在しません");
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "insert into data_table (day,purpose,price) values (?,?,?)";
+			String sql = "insert into data_table (user_id,day,purpose,price) values (?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, data.getDay());
-			ps.setString(2, data.getPurpose());
-			ps.setInt(3, data.getPrice());
+			ps.setInt(1, data.getUser_id());
+			ps.setString(2, data.getDay());
+			ps.setString(3, data.getPurpose());
+			ps.setInt(4, data.getPrice());
 
 			int result = ps.executeUpdate();
 
@@ -47,7 +48,7 @@ public class DataDAO {
 	}
 
 	//閲覧ページで全データを表示するためのメソッド
-	public static List<Data> getAllData() {
+	public static List<Data> getAllData(int user_id) {
 		List<Data> dataList = new ArrayList<>();
 		Data data = null;
 		try {
@@ -56,12 +57,22 @@ public class DataDAO {
 			e.printStackTrace();
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "SELECT * FROM data_table";
+
+			String sql = "SELECT login_db.login_table.*, data_db.data_table.* "
+					+ "FROM login_db.login_table "
+					+ "INNER JOIN data_db.data_table "
+					+ "ON login_db.login_table.id = data_db.data_table.user_id "
+					+ "WHERE login_db.login_table.id = ?";
+
 			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, user_id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				data = new Data(rs.getString("day"), rs.getString("purpose"), rs.getInt("price"));
-				data.setId(rs.getInt("id"));
+				data = new Data(
+						rs.getInt("user_id"),
+						rs.getString("day"),
+						rs.getString("purpose"),
+						rs.getInt("price"));
 				dataList.add(data);
 			}
 		} catch (SQLException e) {

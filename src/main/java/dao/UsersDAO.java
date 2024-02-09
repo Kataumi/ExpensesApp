@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dto.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 public class UsersDAO {
 
@@ -43,8 +45,9 @@ public class UsersDAO {
 	}
 
 	//ログイン処理
-	public static User loginUser(String name, String password) {
+	public static User loginUser(String name, String password, HttpServletRequest request) {
 		User user = null;
+		int user_id = 0;
 		try {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
@@ -63,6 +66,11 @@ public class UsersDAO {
 				user = new User(
 						rs.getString("name"),
 						rs.getString("password"));
+				user_id = rs.getInt("user_id");
+
+				HttpSession session = request.getSession();
+				session.setAttribute("user_id", user_id);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
