@@ -20,6 +20,7 @@ public class DataDAO {
 
 	//新規登録
 	public static boolean reggistData(Data data) {
+
 		try {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
@@ -27,18 +28,19 @@ public class DataDAO {
 			System.out.println("DBが存在しません");
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "insert into data_table (user_id,day,purpose,price) values (?,?,?,?)";
+			String sql = "insert into data_table (day,purpose,price,user_id) values (?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, data.getUser_id());
-			ps.setString(2, data.getDay());
-			ps.setString(3, data.getPurpose());
-			ps.setInt(4, data.getPrice());
+			ps.setString(1, data.getDay());
+			ps.setString(2, data.getPurpose());
+			ps.setInt(3, data.getPrice());
+			ps.setInt(4, data.getUser_id());
 
 			int result = ps.executeUpdate();
 
 			if (result != 1) {
 				return false;
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -69,10 +71,11 @@ public class DataDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				data = new Data(
-						rs.getInt("user_id"),
+						rs.getInt("id"),
 						rs.getString("day"),
 						rs.getString("purpose"),
-						rs.getInt("price"));
+						rs.getInt("price"),
+						rs.getInt("user_id"));
 				dataList.add(data);
 			}
 		} catch (SQLException e) {
@@ -101,7 +104,8 @@ public class DataDAO {
 				String day = rs.getString("day");
 				String purpose = rs.getString("purpose");
 				int price = rs.getInt("price");
-				data = new Data(id, day, purpose, price);
+				int user_id = rs.getInt("user_id");
+				data = new Data(id, day, purpose, price, user_id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,7 +114,7 @@ public class DataDAO {
 	}
 
 	//編集する
-	public static int getEdit(int id, String day, String purpose, int price) {
+	public static int getEdit(int id, int user_id, String day, String purpose, int price) {
 		int result = 0;
 		try {
 			Class.forName(driverName);
@@ -118,12 +122,13 @@ public class DataDAO {
 			e.printStackTrace();
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "UPDATE data_table SET day=?,purpose=?,price=? WHERE id=?";
+			String sql = "UPDATE data_table SET day=?,purpose=?,price=?,user_id=? WHERE id=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, day);
 			ps.setString(2, purpose);
 			ps.setInt(3, price);
 			ps.setInt(4, id);
+			ps.setInt(5, user_id);
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

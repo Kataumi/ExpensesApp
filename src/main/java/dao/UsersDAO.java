@@ -66,7 +66,7 @@ public class UsersDAO {
 				user = new User(
 						rs.getString("name"),
 						rs.getString("password"));
-				user_id = rs.getInt("user_id");
+				user_id = rs.getInt("id");
 
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", user_id);

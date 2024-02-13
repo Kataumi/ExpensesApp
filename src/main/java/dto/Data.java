@@ -5,28 +5,28 @@ import java.io.Serializable;
 public class Data implements Serializable {
 
 	private int id;
-	private int user_id;
 	private String day;
 	private String purpose;
 	private int price;
+	private int user_id;
 
 	//GetCreateの家計簿作成、閲覧用
-	public Data(int user_id, String day, String purpose, int price) {
+	public Data(String day, String purpose, int price,int user_id) {
 		super();
-		this.user_id = user_id;
 		this.day = day;
 		this.purpose = purpose;
 		this.price = price;
+		this.user_id = user_id;
 	}
 
 	//GetEditの家計簿更新用
-	public Data(int id, int user_id, String day, String purpose, int price) {
+	public Data(int id,String day, String purpose, int price,int user_id) {
 		super();
 		this.id = id;
-		this.user_id = user_id;
 		this.day = day;
 		this.purpose = purpose;
 		this.price = price;
+		this.user_id = user_id;
 	}
 
 	//家計簿の詳細検索用
@@ -77,11 +77,11 @@ public class Data implements Serializable {
 		this.price = price;
 	}
 
-	@Override
-	//dataListの内容を日本語に直すメソッド
-	//dto.Data@17c0e322から読める文字に変換する
-	public String toString() {
-		return "Data{" + "day='" + day + '\'' + ", purpose='" + purpose + '\'' + '}';
-	}
+//	@Override
+//	//dataListの内容を日本語に直すメソッド
+//	//dto.Data@17c0e322から読める文字に変換する
+//	public String toString() {
+//		return "Data{" + "day='" + day + '\'' + ", purpose='" + purpose + '\'' + '}';
+//	}
 
 }
