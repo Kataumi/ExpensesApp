@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>新規登録</h1>
-<form action ="Controller" method="post">
+<form action ="GetSignUp" method="post">
 name:<input type ="text" name = "name"><br>
 password:<input type ="password" name ="password"><br>
 <input type ="submit" value="新規登録">

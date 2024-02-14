@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>ログイン</h1>
-<form action ="Login_Controller" method="post">
+<form action ="GetLogin" method="post">
 name:<input type ="text" name = "name"><br>
 password:<input type ="password" name ="password"><br>
 <input type ="submit" value="ログインする">

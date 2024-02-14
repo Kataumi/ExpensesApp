@@ -169,4 +169,44 @@
     <servlet-name>ToCreate</servlet-name>
     <url-pattern>/ToCreate</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToSignUp</display-name>
+    <servlet-name>ToSignUp</servlet-name>
+    <servlet-class>servlet.ToSignUp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToSignUp</servlet-name>
+    <url-pattern>/ToSignUp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSignUp</display-name>
+    <servlet-name>GetSignUp</servlet-name>
+    <servlet-class>servlet.GetSignUp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSignUp</servlet-name>
+    <url-pattern>/GetSignUp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToLogin</display-name>
+    <servlet-name>ToLogin</servlet-name>
+    <servlet-class>servlet.ToLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToLogin</servlet-name>
+    <url-pattern>/ToLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetLogin</display-name>
+    <servlet-name>GetLogin</servlet-name>
+    <servlet-class>servlet.GetLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetLogin</servlet-name>
+    <url-pattern>/GetLogin</url-pattern>
+  </servlet-mapping>
 </web-app>

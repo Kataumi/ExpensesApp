@@ -8,7 +8,7 @@
 </head>
 <body>
 <p>${errorMessage}</p>
-<p><a href=>新規登録画面へ戻る</a></p>
+<p><a href=ToSignUp>新規登録画面へ戻る</a></p>
 
 </body>
 </html>
