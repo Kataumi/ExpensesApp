@@ -8,6 +8,7 @@
 </head>
 <body>
 <p>${errorMessage}</p>
+<p><a href=ViewServlet>リストへ戻る</a></p>
 <p><a href=MainServlet>メイン画面へ戻る</a></p>
 </body>
 </html>

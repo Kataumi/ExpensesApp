@@ -10,8 +10,8 @@ public class Data implements Serializable {
 	private int price;
 	private int user_id;
 
-	//GetCreateの家計簿作成、閲覧用
-	public Data(String day, String purpose, int price,int user_id) {
+	//GetCreateの家計簿作成
+	public Data(String day, String purpose, int price, int user_id) {
 		super();
 		this.day = day;
 		this.purpose = purpose;
@@ -19,8 +19,8 @@ public class Data implements Serializable {
 		this.user_id = user_id;
 	}
 
-	//GetEditの家計簿更新用
-	public Data(int id,String day, String purpose, int price,int user_id) {
+	//ViewServletの家計簿閲覧用
+	public Data(int id, String day, String purpose, int price, int user_id) {
 		super();
 		this.id = id;
 		this.day = day;
@@ -29,12 +29,13 @@ public class Data implements Serializable {
 		this.user_id = user_id;
 	}
 
-	//家計簿の詳細検索用
-	public Data(String day, String purpose) {
+	//GetEditの家計簿更新、詳細検索用
+	public Data(int id, String day, String purpose, int price) {
 		super();
+		this.id = id;
 		this.day = day;
 		this.purpose = purpose;
-
+		this.price = price;
 	}
 
 	public int getId() {
@@ -77,11 +78,11 @@ public class Data implements Serializable {
 		this.price = price;
 	}
 
-//	@Override
-//	//dataListの内容を日本語に直すメソッド
-//	//dto.Data@17c0e322から読める文字に変換する
-//	public String toString() {
-//		return "Data{" + "day='" + day + '\'' + ", purpose='" + purpose + '\'' + '}';
-//	}
+	//	@Override
+	//	//dataListの内容を日本語に直すメソッド
+	//	//dto.Data@17c0e322から読める文字に変換する
+	//	public String toString() {
+	//		return "Data{" + "day='" + day + '\'' + ", purpose='" + purpose + '\'' + '}';
+	//	}
 
 }

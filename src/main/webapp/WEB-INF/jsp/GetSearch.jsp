@@ -30,6 +30,7 @@
 			<td><%=data.getPurpose()%></td>
 			<td><%=data.getPrice()%>円</td>
 			<td><a href="EditServlet?id=<%=data.getId()%>">編集する</a></td>
+			<td><a href="ToDelete?id=<%=data.getId()%>">削除する</a></td>
 		</tr>
 		<%
 }

@@ -27,9 +27,8 @@ public class GetEdit extends HttpServlet {
 		String purpose = request.getParameter("purpose");
 		int price = Integer.parseInt(request.getParameter("price"));
 
-		Data data = new Data(id, day, purpose, price, user_id);
-		int result = DataDAO.getEdit(data.getId(), data.getUser_id(),
-				data.getDay(), data.getPurpose(), data.getPrice());
+		Data data = new Data(id, day, purpose, price);
+		int result = DataDAO.getEdit(data.getId(),data.getDay(), data.getPurpose(), data.getPrice());
 
 		if (result <= 0) {
 			request.setAttribute("errorMessage", "家計簿の更新に失敗しました");

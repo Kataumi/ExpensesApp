@@ -25,7 +25,6 @@ public class DataDAO {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("DBが存在しません");
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
 			String sql = "insert into data_table (day,purpose,price,user_id) values (?,?,?,?)";
@@ -60,7 +59,7 @@ public class DataDAO {
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
 
-			String sql = "SELECT login_db.login_table.*, data_db.data_table.* "
+			String sql = "SELECT login_db.login_table.name AND password, data_db.data_table.* "
 					+ "FROM login_db.login_table "
 					+ "INNER JOIN data_db.data_table "
 					+ "ON login_db.login_table.id = data_db.data_table.user_id "
@@ -114,7 +113,7 @@ public class DataDAO {
 	}
 
 	//編集する
-	public static int getEdit(int id, int user_id, String day, String purpose, int price) {
+	public static int getEdit(int id, String day, String purpose, int price) {
 		int result = 0;
 		try {
 			Class.forName(driverName);
@@ -122,13 +121,13 @@ public class DataDAO {
 			e.printStackTrace();
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "UPDATE data_table SET day=?,purpose=?,price=?,user_id=? WHERE id=?";
+			String sql = "UPDATE data_table SET day=?,purpose=?,price=? WHERE id=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, day);
 			ps.setString(2, purpose);
 			ps.setInt(3, price);
 			ps.setInt(4, id);
-			ps.setInt(5, user_id);
+
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -138,7 +137,7 @@ public class DataDAO {
 	}
 
 	//検索ワードから特定する
-	public static List<Data> searchWord(String day, String purpose) {
+	public static List<Data> searchWord(int id, String day, String purpose, int price, int user_id) {
 		List<Data> dataList = new ArrayList<>();
 		try {
 			Class.forName(driverName);
@@ -146,18 +145,84 @@ public class DataDAO {
 			e.printStackTrace();
 		}
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "SELECT * FROM data_table WHERE day = ? OR purpose = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, day);
-			ps.setString(2, purpose);
 
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				Data data = new Data(rs.getString("day"), rs.getString("purpose"), rs.getInt("price"));
-				data.setId(rs.getInt("id"));
-				dataList.add(data);
+			String sqlId = "SELECT * FROM data_table WHERE user_id = ? AND id = ?";
+			String sqlDay = "SELECT * FROM data_table WHERE user_id = ? AND day = ?";
+			String sqlPurpose = "SELECT * FROM data_table WHERE user_id = ? AND purpose = ?";
+			String sqlPrice = "SELECT * FROM data_table WHERE user_id = ? AND price = ?";
 
+			//IDで検索
+			{
+				PreparedStatement ps = con.prepareStatement(sqlId);
+				ps.setInt(1, user_id);
+				ps.setInt(2, id);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					Data data = new Data(
+							rs.getInt("id"),
+							rs.getString("day"),
+							rs.getString("purpose"),
+							rs.getInt("price"),
+							rs.getInt("user_id"));
+					data.setId(rs.getInt("id"));
+					dataList.add(data);
+				}
 			}
+
+			//日付で検索
+			{
+				PreparedStatement ps = con.prepareStatement(sqlDay);
+				ps.setInt(1, user_id);
+				ps.setString(2, day);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					Data data = new Data(
+							rs.getInt("id"),
+							rs.getString("day"),
+							rs.getString("purpose"),
+							rs.getInt("price"),
+							rs.getInt("user_id"));
+					data.setId(rs.getInt("id"));
+					dataList.add(data);
+				}
+			}
+
+			//用途で検索
+			{
+				PreparedStatement ps = con.prepareStatement(sqlPurpose);
+				ps.setInt(1, user_id);
+				ps.setString(2, purpose);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					Data data = new Data(
+							rs.getInt("id"),
+							rs.getString("day"),
+							rs.getString("purpose"),
+							rs.getInt("price"),
+							rs.getInt("user_id"));
+					data.setId(rs.getInt("id"));
+					dataList.add(data);
+				}
+			}
+
+			//金額で検索
+			{
+				PreparedStatement ps = con.prepareStatement(sqlPrice);
+				ps.setInt(1, user_id);
+				ps.setInt(2, price);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					Data data = new Data(
+							rs.getInt("id"),
+							rs.getString("day"),
+							rs.getString("purpose"),
+							rs.getInt("price"),
+							rs.getInt("user_id"));
+					data.setId(rs.getInt("id"));
+					dataList.add(data);
+				}
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

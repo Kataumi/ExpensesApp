@@ -15,6 +15,7 @@
 用途：<input type ="text" name = "purpose" value="${data.purpose}"><br>
 金額：<input type ="text" name = "price" value="${data.price}">円<br>
 <input type="submit" value="更新する">
+<p><a href=ViewServlet>リストへ戻る</a></p>
 </form>
 
 </body>
