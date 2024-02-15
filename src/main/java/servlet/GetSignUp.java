@@ -42,6 +42,8 @@ public class GetSignUp extends HttpServlet {
 
 		boolean flag = UsersDAO.reggistUser(user);
 		String nextPage = "";
+		
+		//DBを通した後の例外処理
 
 		try {
 			if (flag) {
@@ -56,9 +58,10 @@ public class GetSignUp extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 				rd.forward(request, response);
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			request.setAttribute("errorMessage", "エラーが発生しました: " + e.getMessage());
 			nextPage = "WEB-INF/jsp/Error.jsp";
+			System.out.println(e.getMessage());
 		} finally {
 			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 			rd.forward(request, response);

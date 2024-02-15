@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dto.Hash;
 import dto.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,25 +24,38 @@ public class UsersDAO {
 		try {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("テーブルが見つかりません。" + e.getMessage());
+			return false;
 		}
+
 		try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+
+			//名前が重複していないかの確認
+			String checkName = "select * from login_table where name = ?";
+			PreparedStatement checkps = con.prepareStatement(checkName);
+			checkps.setString(1, user.getName());
+			ResultSet rs = checkps.executeQuery();
+			if (rs.next()) {
+				return false;
+			}
+
+			//サインアップ処理
 			String sql = "insert into login_table (name,password) values (?,?)";
+			String hashedPassword = Hash.hashPassword(user.getPassword());
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getName());
-			ps.setString(2, user.getPassword());
-
+			ps.setString(2, hashedPassword);
 			int result = ps.executeUpdate();
 
 			if (result != 1) {
 				return false;
+
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("データベースエラーが発生。" + e.getMessage());
 			return false;
 		}
 		return true;
-
 	}
 
 	//ログイン処理
@@ -57,8 +71,10 @@ public class UsersDAO {
 			String sql = "SELECT * FROM login_table WHERE name = ? AND password = ?";
 
 			PreparedStatement ps = con.prepareStatement(sql);
+			String hashedPassword = Hash.hashPassword(password);
+
 			ps.setString(1, name);
-			ps.setString(2, password);
+			ps.setString(2, hashedPassword);
 
 			ResultSet rs = ps.executeQuery();
 

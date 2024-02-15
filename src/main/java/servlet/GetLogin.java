@@ -16,6 +16,7 @@ public class GetLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
@@ -32,7 +33,7 @@ public class GetLogin extends HttpServlet {
 
 		String nextPage = "";
 		try {
-			if (user.getName().equals(name) && user.getPassword().equals(password)) {
+			if (user != null) {
 				nextPage = "WEB-INF/jsp/LoginSuccess.jsp";
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
@@ -44,11 +45,11 @@ public class GetLogin extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 				rd.forward(request, response);
 			}
-			
+
 		} catch (Exception e) {
 			request.setAttribute("errorMessage", "エラーが発生しました: " + e.getMessage());
 			nextPage = "WEB-INF/jsp/Error.jsp";
-			
+
 		} finally {
 			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 			rd.forward(request, response);
