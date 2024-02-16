@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>削除失敗</title>
+<title>検索結果</title>
 </head>
 <body>
 <p>${errorMessage}</p>
-<p><a href=ToView>リストへ戻る</a></p>
+<p><a href=ToSearch>検索画面へ戻る</a></p>
 <p><a href=ToMain>メイン画面へ戻る</a></p>
 </body>
 </html>

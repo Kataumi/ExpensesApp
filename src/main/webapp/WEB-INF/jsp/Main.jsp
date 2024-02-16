@@ -11,8 +11,8 @@
 <p>何をしますか？</p>
 
 <a href="ToCreate">家計簿を登録する</a>
-<a href="ViewServlet">家計簿を閲覧する</a>
-<a href="ToSeartch">家計簿を検索する</a>
+<a href="ToView">家計簿を閲覧する</a>
+<a href="ToSearch">家計簿を検索する</a>
 <a href="Logout">ログアウトする</a>
 
 </body>

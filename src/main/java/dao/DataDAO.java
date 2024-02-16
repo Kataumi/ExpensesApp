@@ -18,7 +18,7 @@ public class DataDAO {
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "root";
 
-	//新規登録
+	//家計簿の作成
 	public static boolean reggistData(Data data) {
 
 		try {

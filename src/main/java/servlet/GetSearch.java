@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.DataDAO;
 import dto.Data;
@@ -11,36 +13,42 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class GetEdit extends HttpServlet {
+public class GetSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		int id = Integer.parseInt(request.getParameter("id"));
+
+		String idStr = request.getParameter("id");
+		int id = idStr != null && !idStr.isEmpty() ? Integer.parseInt(idStr) : 0;
+		//idStrがnullでない＋空文字列でない場合にint型のidに変換。そうではなければint=0
+
+		String priceStr = request.getParameter("price");
+		int price = priceStr != null && !priceStr.isEmpty() ? Integer.parseInt(priceStr) : 0;
+
 		String day = request.getParameter("day");
 		String purpose = request.getParameter("purpose");
-		int price = Integer.parseInt(request.getParameter("price"));
 
-		Data data = new Data(id, day, purpose, price);
+		HttpSession session = request.getSession();
+		int user_id = (int) session.getAttribute("user_id");
 		String nextPage = "";
 
 		try {
-			int result = DataDAO.getEdit(data.getId(), data.getDay(), data.getPurpose(), data.getPrice());
+			List<Data> data = DataDAO.searchWord(id, day, purpose, price, user_id);
+			ArrayList<Data> dataList = new ArrayList<>();
 
-			if (result <= 0) {
-				request.setAttribute("errorMessage", "家計簿の更新に失敗しました");
-				nextPage = "WEB-INF/jsp/EditFalse.jsp";
+			if (data != null && !data.isEmpty()) {
+				dataList.addAll(data); //addAllメソッドでdataリストの要素をdataListの要素に追加する
+
+				request.setAttribute("dataList", dataList);
+
+				nextPage = "WEB-INF/jsp/SearchSuccess.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 				rd.forward(request, response);
 			} else {
-				HttpSession session = request.getSession();
-				session.setAttribute("data", data);
-				nextPage = "WEB-INF/jsp/EditSuccess.jsp";
+				request.setAttribute("errorMessage", "検索結果がありませんでした");
+				nextPage = "WEB-INF/jsp/SearchFalse.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 				rd.forward(request, response);
 			}
@@ -49,6 +57,6 @@ public class GetEdit extends HttpServlet {
 			nextPage = "WEB-INF/jsp/Error.jsp";
 			System.out.println(e.getMessage());
 		}
-	}
 
+	}
 }

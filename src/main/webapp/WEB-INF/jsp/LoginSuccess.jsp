@@ -8,8 +8,8 @@
 </head>
 <body>
 <h1>ログインに成功しました。</h1>
-<p>名前：${user.name}さん</p>
-<a href=MainServlet>メイン画面へ</a>
+<p>ようこそ、${user.name}さん</p>
+<a href=ToMain>メイン画面へ</a>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <p>ログアウトしました</p>
-<p><a href=LoginServlet>ログイン画面へ</a></p>
+<p><a href=ToLogin>ログイン画面へ</a></p>
 
 
 </body>

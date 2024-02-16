@@ -8,13 +8,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ToSeartch extends HttpServlet {
+public class ToMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Search.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Main.jsp");
 		rd.forward(request, response);
 	}
-
 }

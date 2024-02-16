@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>家計簿の登録をする</h1>
-<p><a href=MainServlet>メイン画面へ戻る</a></p>
+<p><a href=ToMain>メイン画面へ戻る</a></p>
 <form action="GetCreate" method="post">
 日付：<input type ="date" name = "day"><br>
 用途：<input type ="text" name = "purpose"><br>

@@ -46,7 +46,7 @@ public class GetLogin extends HttpServlet {
 				rd.forward(request, response);
 			}
 
-		} catch (Exception e) {
+		} catch (IOException e) {
 			request.setAttribute("errorMessage", "エラーが発生しました: " + e.getMessage());
 			nextPage = "WEB-INF/jsp/Error.jsp";
 

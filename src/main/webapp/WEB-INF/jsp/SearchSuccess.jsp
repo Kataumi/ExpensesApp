@@ -29,16 +29,15 @@
 			<td><%=data.getDay()%></td>
 			<td><%=data.getPurpose()%></td>
 			<td><%=data.getPrice()%>円</td>
-			<td><a href="EditServlet?id=<%=data.getId()%>">編集する</a></td>
+			<td><a href="ToEdit?id=<%=data.getId()%>">編集する</a></td>
 			<td><a href="ToDelete?id=<%=data.getId()%>">削除する</a></td>
 		</tr>
 		<%
 }
 %>
 	</table>
-	<p>
-		<a href=MainServlet>メイン画面へ戻る</a>
-	</p>
+	<p><a href=ToSearch>検索画面へ戻る</a></p>
+	<p><a href=ToMain>メイン画面へ戻る</a></p>
 
 </body>
 </html>

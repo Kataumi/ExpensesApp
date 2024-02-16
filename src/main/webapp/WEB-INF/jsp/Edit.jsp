@@ -10,12 +10,12 @@
 <h1>家計簿を編集する</h1>
 <form action="GetEdit" method="post">
 <input type="hidden" name="id" value="${data.id}">
-<input type="hidden" name="user_id" value="${user_id}">
 日付：<input type ="date" name = "day" value="${data.day}"><br>
 用途：<input type ="text" name = "purpose" value="${data.purpose}"><br>
 金額：<input type ="text" name = "price" value="${data.price}">円<br>
 <input type="submit" value="更新する">
-<p><a href=ViewServlet>リストへ戻る</a></p>
+<p><a href=ToView>リストへ戻る</a></p>
+<p><a href=ToMain>メイン画面へ戻る</a></p>
 </form>
 
 </body>

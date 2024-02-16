@@ -209,4 +209,54 @@
     <servlet-name>GetLogin</servlet-name>
     <url-pattern>/GetLogin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToEdit</display-name>
+    <servlet-name>ToEdit</servlet-name>
+    <servlet-class>servlet.ToEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToEdit</servlet-name>
+    <url-pattern>/ToEdit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToView</display-name>
+    <servlet-name>ToView</servlet-name>
+    <servlet-class>servlet.ToView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToView</servlet-name>
+    <url-pattern>/ToView</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToMain</display-name>
+    <servlet-name>ToMain</servlet-name>
+    <servlet-class>servlet.ToMain</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToMain</servlet-name>
+    <url-pattern>/ToMain</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToSearch</display-name>
+    <servlet-name>ToSearch</servlet-name>
+    <servlet-class>servlet.ToSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToSearch</servlet-name>
+    <url-pattern>/ToSearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSearch</display-name>
+    <servlet-name>GetSearch</servlet-name>
+    <servlet-class>servlet.GetSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSearch</servlet-name>
+    <url-pattern>/GetSearch</url-pattern>
+  </servlet-mapping>
 </web-app>

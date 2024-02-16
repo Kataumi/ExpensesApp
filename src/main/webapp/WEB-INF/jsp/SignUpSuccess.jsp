@@ -9,7 +9,7 @@
 <body>
 	<h1>新規登録しました。</h1>
 	<p>名前：${user.name}さん</p>
-	<a href="LoginServlet">ログインする</a>
+	<a href="ToLogin">ログインする</a>
 	</form>
 </body>
 </html>

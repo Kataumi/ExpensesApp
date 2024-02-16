@@ -23,16 +23,27 @@ public class GetCreate extends HttpServlet {
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 
 		Data data = new Data(day, purpose, price, user_id);
-		boolean flag = DataDAO.reggistData(data);
-
 		String nextPage = "";
 
-		if (flag) {
-			nextPage = "WEB-INF/jsp/createSuccess.jsp";
-			HttpSession session = request.getSession();
-			session.setAttribute("data", data);
-			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
-			rd.forward(request, response);
+		try {
+			boolean flag = DataDAO.reggistData(data);
+
+			if (flag) {
+				nextPage = "WEB-INF/jsp/CreateSuccess.jsp";
+				HttpSession session = request.getSession();
+				session.setAttribute("data", data);
+				RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+				rd.forward(request, response);
+			} else {
+				request.setAttribute("errorMessage", "家計簿の作成ができませんでした。");
+				nextPage = "WEB-INF/jsp/CreateFalse.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+				rd.forward(request, response);
+			}
+		} catch (IOException e) {
+			request.setAttribute("errorMessage", "DBにエラーが発生しました: " + e.getMessage());
+			nextPage = "WEB-INF/jsp/Error.jsp";
+			System.out.println(e.getMessage());
 		}
 	}
 }
