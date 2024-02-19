@@ -1,0 +1,65 @@
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 14px;
+}
+
+table {
+    width: 40%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000;
+    text-align:center;
+    font-size: 12px; /* フォントサイズをさらに小さくする */
+}
+
+td a {
+    display: inline-block;
+    width: 40%;
+    height: 100%;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+p {
+    color: #6c757d;
+    font-size: 14px;
+    padding-top: 10%;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+a {
+    display: inline-block;
+    width: 60%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px; /* パディングを小さくする */
+    margin: 8px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px; /* フォントサイズを小さくする */
+}
+
+.main-button {
+    width: 15%;
+    margin-bottom: 5%;
+}
+
+a:hover {
+    background-color: #0056b3;
+}

@@ -6,13 +6,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="CSS/view.css">
 <meta charset="UTF-8">
-<title>閲覧する</title>
+<title>家計簿アプリ 閲覧画面</title>
 </head>
 <body>
-	<p>あなたが登録した家計簿を表示します</p>
-	<p><a href=ToMain>メイン画面へ戻る</a></p>
 	
+	<p>あなたが登録した家計簿を表示します</p>
 	<table>
 		<tr>
 			<th>番号</th>
@@ -31,18 +36,12 @@
 			<td><%=data.getDay()%></td>
 			<td><%=data.getPurpose()%></td>
 			<td><%=data.getPrice()%>円</td>
-			<td><a href="ToEdit?id=<%=data.getId()%>">編集する</a></td>
-			<td><a href="ToDelete?id=<%=data.getId()%>">削除する</a></td>
-			
-			
-			<!-- [?id=<=data.getId()>]はクエリパラメーター
-			 サーバーに送りたいデータを指定するために追加する文字列。
-			 この場合、EditServletにdata.getId()という値をidと名付けて送っている-->
+			<td><a href="ToEdit?id=<%=data.getId()%>">編集する</a> 
+			<a href="ToDelete?id=<%=data.getId()%>">削除する</a></td>
 		</tr>
-		<%
-}
-%>
-
+		<%}%>
 	</table>
+		<a class="main-button" href=ToMain>メイン画面へ戻る</a>
+	
 </body>
 </html>

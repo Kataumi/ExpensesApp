@@ -19,8 +19,19 @@ public class GetCreate extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String day = request.getParameter("day");
 		String purpose = request.getParameter("purpose");
-		int price = Integer.parseInt(request.getParameter("price"));
+		String priceStr = request.getParameter("price");
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
+
+		//いずれか、もしくは全てが未入力の場合エラー
+		if (day == null || day.isEmpty() ||
+				purpose == null || purpose.isEmpty() ||
+				priceStr == null || priceStr.isEmpty()) {
+			request.setAttribute("errorMessage", "日付、用途、金額を入力してください");
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/CreateFalse.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		int price = Integer.parseInt(priceStr);
 
 		Data data = new Data(day, purpose, price, user_id);
 		String nextPage = "";
